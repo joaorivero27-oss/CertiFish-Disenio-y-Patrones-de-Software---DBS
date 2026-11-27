@@ -1,0 +1,15 @@
+{
+  "name": "certifish-test-use-cases",
+  "version": "1.0.0",
+  "description": "Test Use Cases en Cucumber de las 16 Historias de Usuario de CertiFish (Deep Blue Solutions)",
+  "private": true,
+  "scripts": {
+    "test": "cucumber-js"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^13.0.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
