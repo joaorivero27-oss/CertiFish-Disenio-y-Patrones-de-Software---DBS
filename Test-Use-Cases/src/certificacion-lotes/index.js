@@ -14,7 +14,8 @@ const {
  * y expone la verificación pública (Open Host Service).
  */
 
-const FORMATO_CODIGO = /^CF-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
+// Mismo formato que la landing page (sección 15): CF, año de emisión y correlativo de 6 dígitos, p. ej. CF-2026-000123
+const FORMATO_CODIGO = /^CF-\d{4}-\d{6}$/;
 const MERCADOS = { 'Unión Europea': 'CATCH', 'Estados Unidos': 'SIMP' };
 const MENSAJE_ARCHIVO = 'No se pudo generar el archivo. Intenta nuevamente.';
 const MENSAJE_ESQUEMA = 'Los datos del lote no cumplen el formato oficial. Revisa la información del lote.';
@@ -33,6 +34,7 @@ class ServicioCertificacion {
     this.director = new DirectorDeDocumentos();
     this.certificados = new Map();
     this.codigoPorLote = new Map();
+    this.correlativo = 0;
     this.entregas = [];
     this.falloAlEmitir = false;
     this.falloAlGenerarArchivos = false;
@@ -87,7 +89,8 @@ class ServicioCertificacion {
     }
     const contenido = this.director.armar(new ConstructorCertificado(), this.datosDelLote(lote));
     const huella = huellaDe(contenido);
-    const codigoVerificacion = `CF-${huella.slice(0, 4).toUpperCase()}-${huella.slice(4, 8).toUpperCase()}`;
+    this.correlativo += 1;
+    const codigoVerificacion = `CF-${this.reloj.ahora().getFullYear()}-${String(this.correlativo).padStart(6, '0')}`;
     const certificado = { codigoVerificacion, lote: codigoLote, contenido, huella, emitidoEn: this.reloj.ahora(), responsable };
     this.certificados.set(codigoVerificacion, certificado);
     this.codigoPorLote.set(codigoLote, codigoVerificacion);
