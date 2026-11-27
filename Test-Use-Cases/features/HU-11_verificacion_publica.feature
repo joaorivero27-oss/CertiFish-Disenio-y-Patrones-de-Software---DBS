@@ -16,7 +16,7 @@ Característica: HU-11 Verificar públicamente un certificado de lote
     Y no muestra datos personales de los Patrones de embarcación
 
   Escenario: Código de verificación inválido
-    Cuando el tercero interesado ingresa el código "CF-ZZZZ-9999" en la consulta pública
+    Cuando el tercero interesado ingresa el código "CF-2026-999999" en la consulta pública
     Entonces el sistema muestra el mensaje "Código de verificación no válido."
 
   Esquema del escenario: Código de verificación vacío o con formato incorrecto
