@@ -30,7 +30,7 @@ When('el Coordinador solicita emitir el certificado del lote {string}', function
 
 Then('el sistema genera el certificado con un código de verificación', function () {
   assert.ok(this.ultimo.ok, this.ultimo.mensaje);
-  assert.match(this.certificadoActual.codigoVerificacion, /^CF-[A-Z0-9]{4}-[A-Z0-9]{4}$/);
+  assert.match(this.certificadoActual.codigoVerificacion, /^CF-\d{4}-\d{6}$/); // formato de la landing page
 });
 
 Then('el certificado incluye la cooperativa {string}, la especie {string} y las matrículas {string}',
